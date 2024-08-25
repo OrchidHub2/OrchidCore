@@ -21,7 +21,6 @@ import org.bukkit.event.Listener
 import java.util.function.Function
 import kotlin.reflect.KClass
 
-//TODO: Move this to a separate project once we have an actual server and a maven repo
 abstract class CrewCoPlugin : SuspendingJavaPlugin() {
 	private lateinit var injector: Injector
 
@@ -37,7 +36,7 @@ abstract class CrewCoPlugin : SuspendingJavaPlugin() {
 		val fromPlayerMapper = Function<Player, CommandSender> { it }
 
 		val coordinator =
-			AsynchronousCommandExecutionCoordinator.newBuilder<Player>().withAsynchronousParsing().withExecutor(
+			AsynchronousCommandExecutionCoordinator.builder<Player>().withAsynchronousParsing().withExecutor(
 				SpigotExecutor(this)
 			).build()
 
